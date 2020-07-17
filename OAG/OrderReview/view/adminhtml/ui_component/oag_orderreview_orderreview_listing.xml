@@ -1,0 +1,110 @@
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">oag_orderreview_orderreview_listing.oag_orderreview_orderreview_listing_data_source</item>
+            <item name="deps" xsi:type="string">oag_orderreview_orderreview_listing.oag_orderreview_orderreview_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">spinner_columns</item>
+    </argument>
+    <dataSource name="nameOfDataSource">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">oag_orderreview_orderreview_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <paging name="listing_paging"/>
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="verified">
+                <settings>
+                    <type>status</type>
+                    <label translate="true">Change Verified</label>
+                    <actions>
+                        <action name="0">
+                            <type>enable</type>
+                            <label translate="true">Yes</label>
+                            <url path="oag_orderreview/orderreview/massVerified">
+                                <param name="verified">1</param>
+                            </url>
+                        </action>
+                        <action name="1">
+                            <type>disable</type>
+                            <label translate="true">No</label>
+                            <url path="oag_orderreview/orderreview/massVerified">
+                                <param name="verified">0</param>
+                            </url>
+                        </action>
+                    </actions>
+                </settings>
+            </action>
+        </massaction>
+    </listingToolbar>
+    <columns name="spinner_columns">
+        <selectionsColumn name="ids" sortOrder="0">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="order_id" sortOrder="20">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Order ID</label>
+            </settings>
+        </column>
+        <column name="shipping" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Shipping value</label>
+            </settings>
+        </column>
+        <column name="product" sortOrder="40">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Product value</label>
+            </settings>
+        </column>
+        <column name="customer_support" sortOrder="50">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Customer support value</label>
+            </settings>
+        </column>
+        <column name="comment" sortOrder="60">
+            <settings>
+                <filter>text</filter>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Comment</label>
+            </settings>
+        </column>
+        <column name="verified" sortOrder="70" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="OAG\OrderReview\Model\OrderReview\Attribute\Source\Verified"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Verified</label>
+            </settings>
+        </column>
+    </columns>
+</listing>
+
